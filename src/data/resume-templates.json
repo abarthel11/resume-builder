@@ -1,0 +1,136 @@
+{
+  "templates": {
+    "traditional": {
+      "name": "Traditional",
+      "description": "Classic top-to-bottom layout suitable for most industries",
+      "metadata": {
+        "version": "1.0.0",
+        "template": "traditional",
+        "titleStyle": "name-and-title",
+        "colorScheme": "professional-blue"
+      },
+      "defaultSections": [
+        { "type": "contact", "order": 1, "enabled": true },
+        { "type": "summary", "order": 2, "enabled": true },
+        { "type": "experience", "order": 3, "enabled": true },
+        { "type": "education", "order": 4, "enabled": true },
+        { "type": "skills", "order": 5, "enabled": true }
+      ],
+      "settings": {
+        "pageMargins": { "top": 1, "bottom": 1, "left": 1, "right": 1 },
+        "fontSize": { "body": 11, "heading1": 16, "heading2": 14, "heading3": 12 },
+        "lineSpacing": 1.15,
+        "sectionSpacing": 20
+      }
+    },
+    "modern": {
+      "name": "Modern Two-Column",
+      "description": "Contemporary design with sidebar for skills and contact",
+      "metadata": {
+        "version": "1.0.0",
+        "template": "modern",
+        "titleStyle": "bold",
+        "colorScheme": "modern-teal"
+      },
+      "defaultSections": [
+        { "type": "contact", "order": 1, "enabled": true, "column": "sidebar" },
+        { "type": "skills", "order": 2, "enabled": true, "column": "sidebar" },
+        { "type": "certifications", "order": 3, "enabled": true, "column": "sidebar" },
+        { "type": "summary", "order": 1, "enabled": true, "column": "main" },
+        { "type": "experience", "order": 2, "enabled": true, "column": "main" },
+        { "type": "education", "order": 3, "enabled": true, "column": "main" }
+      ]
+    },
+    "technical": {
+      "name": "Technical Professional",
+      "description": "Emphasizes technical skills and project experience",
+      "metadata": {
+        "version": "1.0.0",
+        "template": "technical",
+        "titleStyle": "name-title-summary",
+        "colorScheme": "tech-gray"
+      },
+      "defaultSections": [
+        { "type": "contact", "order": 1, "enabled": true },
+        { "type": "summary", "order": 2, "enabled": true },
+        { "type": "skills", "order": 3, "enabled": true, "prominence": "high" },
+        { "type": "experience", "order": 4, "enabled": true },
+        { "type": "projects", "order": 5, "enabled": true },
+        { "type": "certifications", "order": 6, "enabled": true },
+        { "type": "education", "order": 7, "enabled": true }
+      ]
+    },
+    "executive": {
+      "name": "Executive",
+      "description": "Professional layout for senior leadership positions",
+      "metadata": {
+        "version": "1.0.0",
+        "template": "executive",
+        "titleStyle": "name-and-title",
+        "colorScheme": "executive-navy"
+      },
+      "defaultSections": [
+        { "type": "contact", "order": 1, "enabled": true },
+        { "type": "summary", "order": 2, "enabled": true, "prominence": "high" },
+        { "type": "experience", "order": 3, "enabled": true },
+        { "type": "awards", "order": 4, "enabled": false },
+        { "type": "education", "order": 5, "enabled": true },
+        { "type": "skills", "order": 6, "enabled": true }
+      ]
+    }
+  },
+  "sectionDisplayOptions": {
+    "contact": {
+      "horizontal": {
+        "description": "All contact info in one line",
+        "bestFor": ["traditional", "executive"]
+      },
+      "vertical": {
+        "description": "Stacked contact information",
+        "bestFor": ["modern", "creative"]
+      },
+      "compact": {
+        "description": "Minimal space usage",
+        "bestFor": ["technical", "academic"]
+      }
+    },
+    "skills": {
+      "categorized": {
+        "description": "Grouped by category",
+        "example": "Programming: Python, Java, C++"
+      },
+      "flat": {
+        "description": "Simple comma-separated list",
+        "example": "Python, Java, C++, React, Node.js"
+      },
+      "tagged": {
+        "description": "Visual tags/badges",
+        "example": "[Python] [Java] [React]"
+      },
+      "rated": {
+        "description": "With proficiency indicators",
+        "example": "Python ●●●●○ | Java ●●●○○"
+      }
+    },
+    "experience": {
+      "detailed": {
+        "showDates": true,
+        "showLocation": true,
+        "showDescription": true,
+        "achievementStyle": "bullets"
+      },
+      "compact": {
+        "showDates": true,
+        "showLocation": false,
+        "showDescription": false,
+        "achievementStyle": "bullets"
+      },
+      "narrative": {
+        "showDates": true,
+        "showLocation": true,
+        "showDescription": true,
+        "achievementStyle": "paragraph"
+      }
+    }
+  }
+}
