@@ -122,87 +122,26 @@ body {
 }
 
 /* Flexible Editor Styles */
-.flexible-editor-container {
-  width: 100%;
-  height: calc(100vh - 200px);
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
 .flexible-resume-editor {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.editor-header {
-  padding: 20px;
+.flexible-resume-editor .editor-header {
+  padding: 15px;
   border-bottom: 1px solid #dee2e6;
   background: #f8f9fa;
-}
-
-.header-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.header-controls h1 {
-  margin: 0;
-  font-size: 20px;
-  color: #333;
-}
-
-.view-controls {
-  display: flex;
-  gap: 5px;
-  background: white;
-  padding: 4px;
-  border-radius: 6px;
-  border: 1px solid #dee2e6;
-}
-
-.view-btn {
-  background: transparent;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s;
-  color: #666;
-}
-
-.view-btn:hover {
-  background: #f8f9fa;
-  color: #333;
-}
-
-.view-btn.active {
-  background: #007bff;
-  color: white;
-}
-
-.view-btn.active:hover {
-  background: #0056b3;
-}
-
-.editor-content {
-  flex: 1;
-  overflow: hidden;
 }
 
 .editor-workspace {
   display: flex;
   height: 100%;
+  flex: 1;
 }
 
 .sections-sidebar {
-  width: 300px;
+  width: 280px;
   background: #f8f9fa;
   border-right: 1px solid #dee2e6;
   overflow-y: auto;
@@ -843,5 +782,227 @@ label {
 
   .template-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Flexible Resume Preview Styles */
+.flexible-resume-preview {
+  padding: 40px;
+  font-size: 14px;
+  line-height: 1.5;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.flexible-resume-preview .resume-section {
+  margin-bottom: 25px;
+}
+
+.flexible-resume-preview .resume-section h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #333;
+}
+
+.flexible-resume-preview .contact-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.flexible-resume-preview .contact-section h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.flexible-resume-preview .contact-section h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  border-bottom: none;
+  color: #666;
+}
+
+.flexible-resume-preview .contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.flexible-resume-preview .contact-item {
+  font-size: 14px;
+  color: #666;
+}
+
+.flexible-resume-preview .summary-section .summary-highlights {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.flexible-resume-preview .experience-item,
+.flexible-resume-preview .education-item,
+.flexible-resume-preview .project-item {
+  margin-bottom: 20px;
+}
+
+.flexible-resume-preview .experience-header,
+.flexible-resume-preview .education-header,
+.flexible-resume-preview .project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.flexible-resume-preview .experience-header h3,
+.flexible-resume-preview .education-header h3,
+.flexible-resume-preview .project-header h3 {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.flexible-resume-preview .experience-header h4 {
+  font-size: 14px;
+  font-weight: normal;
+  color: #666;
+}
+
+.flexible-resume-preview .experience-dates,
+.flexible-resume-preview .education-dates,
+.flexible-resume-preview .project-date {
+  font-size: 14px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.flexible-resume-preview .experience-location,
+.flexible-resume-preview .project-role {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+}
+
+.flexible-resume-preview .experience-achievements,
+.flexible-resume-preview .project-achievements {
+  margin-left: 20px;
+  margin-top: 8px;
+}
+
+.flexible-resume-preview .experience-achievements li,
+.flexible-resume-preview .project-achievements li {
+  margin-bottom: 4px;
+}
+
+.flexible-resume-preview .experience-technologies,
+.flexible-resume-preview .project-technologies {
+  font-size: 13px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.flexible-resume-preview .skills-content {
+  display: grid;
+  gap: 15px;
+}
+
+.flexible-resume-preview .skills-content.columns-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.flexible-resume-preview .skills-content.columns-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.flexible-resume-preview .skill-category h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.flexible-resume-preview .skill-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.flexible-resume-preview .skill-item {
+  background: #f8f9fa;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  position: relative;
+}
+
+.flexible-resume-preview .skill-item .proficiency {
+  margin-left: 5px;
+  font-size: 10px;
+  color: #666;
+}
+
+.flexible-resume-preview .certification-group {
+  margin-bottom: 20px;
+}
+
+.flexible-resume-preview .certification-issuer {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.flexible-resume-preview .certification-item {
+  margin-bottom: 8px;
+}
+
+.flexible-resume-preview .certification-item h4 {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.flexible-resume-preview .certification-date,
+.flexible-resume-preview .certification-id {
+  font-size: 12px;
+  color: #666;
+  margin-right: 10px;
+}
+
+/* Template-specific styles */
+.flexible-resume-preview.template-modern {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  padding: 30px;
+}
+
+.flexible-resume-preview.template-technical .skills-section {
+  order: -1;
+}
+
+.flexible-resume-preview.template-executive .summary-section {
+  border-left: 4px solid #007bff;
+  padding-left: 20px;
+}
+
+/* Print styles for flexible resume */
+@media print {
+  .flexible-resume-preview {
+    padding: 0.5in;
+    font-size: 11pt;
+    line-height: 1.4;
+  }
+  
+  .flexible-resume-preview .contact-section h1 {
+    font-size: 20pt;
+  }
+  
+  .flexible-resume-preview .resume-section h2 {
+    font-size: 14pt;
+    page-break-after: avoid;
+  }
+  
+  .flexible-resume-preview .experience-item,
+  .flexible-resume-preview .education-item,
+  .flexible-resume-preview .project-item {
+    page-break-inside: avoid;
   }
 }

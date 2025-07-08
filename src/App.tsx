@@ -3,6 +3,7 @@ import { Resume, FlexibleResume, convertToFlexibleResume } from './types/Resume'
 import { ResumeEditor } from './components/ResumeEditor';
 import { ResumePreview } from './components/ResumePreview';
 import { FlexibleResumeEditor } from './components/FlexibleResumeEditor';
+import { FlexibleResumePreview } from './components/FlexibleResumePreview';
 import { saveResume, loadResume, exportResumeJSON, importResumeJSON } from './utils/storage';
 import './App.css';
 
@@ -191,12 +192,18 @@ function App() {
             </div>
           </>
         ) : (
-          <div className="flexible-editor-container">
-            <FlexibleResumeEditor 
-              resume={flexibleResume} 
-              onResumeChange={setFlexibleResume} 
-            />
-          </div>
+          <>
+            <div className="editor-panel">
+              <FlexibleResumeEditor 
+                resume={flexibleResume} 
+                onResumeChange={setFlexibleResume} 
+              />
+            </div>
+            
+            <div className="preview-panel">
+              <FlexibleResumePreview resume={flexibleResume} />
+            </div>
+          </>
         )}
       </div>
     </div>

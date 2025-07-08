@@ -3,7 +3,6 @@ import { FlexibleResume, ResumeSection, ResumeLayout, TitleStyle } from '../type
 import { SectionManager } from './SectionManager';
 import { TemplateSelector } from './TemplateSelector';
 import { SectionEditor } from './SectionEditor';
-import { FlexibleResumePreview } from './FlexibleResumePreview';
 
 interface FlexibleResumeEditorProps {
   resume: FlexibleResume;
@@ -15,7 +14,6 @@ export const FlexibleResumeEditor: React.FC<FlexibleResumeEditorProps> = ({
   onResumeChange,
 }) => {
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [showPreview, setShowPreview] = useState(false);
 
   const handleSectionUpdate = (sectionId: string, updatedSection: ResumeSection) => {
     const updatedSections = resume.sections.map(section =>
@@ -101,24 +99,6 @@ export const FlexibleResumeEditor: React.FC<FlexibleResumeEditorProps> = ({
   return (
     <div className="flexible-resume-editor">
       <div className="editor-header">
-        <div className="header-controls">
-          <h1>Resume Builder</h1>
-          <div className="view-controls">
-            <button
-              className={`view-btn ${!showPreview ? 'active' : ''}`}
-              onClick={() => setShowPreview(false)}
-            >
-              Edit
-            </button>
-            <button
-              className={`view-btn ${showPreview ? 'active' : ''}`}
-              onClick={() => setShowPreview(true)}
-            >
-              Preview
-            </button>
-          </div>
-        </div>
-        
         <TemplateSelector
           currentTemplate={resume.metadata.template}
           currentTitleStyle={resume.metadata.titleStyle}
@@ -127,38 +107,32 @@ export const FlexibleResumeEditor: React.FC<FlexibleResumeEditorProps> = ({
         />
       </div>
 
-      <div className="editor-content">
-        {showPreview ? (
-          <FlexibleResumePreview resume={resume} />
-        ) : (
-          <div className="editor-workspace">
-            <div className="sections-sidebar">
-              <SectionManager
-                sections={resume.sections}
-                onSectionAdd={handleSectionAdd}
-                onSectionDelete={handleSectionDelete}
-                onSectionReorder={handleSectionReorder}
-                onSectionSelect={setActiveSection}
-                activeSection={activeSection}
-              />
-            </div>
+      <div className="editor-workspace">
+        <div className="sections-sidebar">
+          <SectionManager
+            sections={resume.sections}
+            onSectionAdd={handleSectionAdd}
+            onSectionDelete={handleSectionDelete}
+            onSectionReorder={handleSectionReorder}
+            onSectionSelect={setActiveSection}
+            activeSection={activeSection}
+          />
+        </div>
 
-            <div className="section-editor">
-              {activeSection ? (
-                <SectionEditor
-                  section={resume.sections.find(s => s.id === activeSection)!}
-                  onSectionUpdate={handleSectionUpdate}
-                  onClose={() => setActiveSection(null)}
-                />
-              ) : (
-                <div className="no-section-selected">
-                  <h2>Select a section to edit</h2>
-                  <p>Choose a section from the sidebar to start editing your resume.</p>
-                </div>
-              )}
+        <div className="section-editor">
+          {activeSection ? (
+            <SectionEditor
+              section={resume.sections.find(s => s.id === activeSection)!}
+              onSectionUpdate={handleSectionUpdate}
+              onClose={() => setActiveSection(null)}
+            />
+          ) : (
+            <div className="no-section-selected">
+              <h2>Select a section to edit</h2>
+              <p>Choose a section from the sidebar to start editing your resume.</p>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
