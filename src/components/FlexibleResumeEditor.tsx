@@ -64,14 +64,49 @@ export const FlexibleResumeEditor: React.FC<FlexibleResumeEditorProps> = ({
       section.id === sectionId ? { ...section, order: newOrder } : section
     );
     
+    // Normalize orders to ensure they are sequential
+    const sortedSections = updatedSections.sort((a, b) => a.order - b.order);
+    const normalizedSections = sortedSections.map((section, index) => ({
+      ...section,
+      order: index + 1,
+    }));
+    
     onResumeChange({
       ...resume,
-      sections: updatedSections,
+      sections: normalizedSections,
       metadata: {
         ...resume.metadata,
         lastModified: new Date().toISOString(),
       },
     });
+  };
+
+  const handleSectionDragReorder = (draggedId: string, dropTargetId: string) => {
+    const sortedSections = [...resume.sections].sort((a, b) => a.order - b.order);
+    const draggedIndex = sortedSections.findIndex(s => s.id === draggedId);
+    const dropIndex = sortedSections.findIndex(s => s.id === dropTargetId);
+    
+    if (draggedIndex !== -1 && dropIndex !== -1 && draggedIndex !== dropIndex) {
+      // Create new array with reordered sections
+      const newSections = [...sortedSections];
+      const [draggedItem] = newSections.splice(draggedIndex, 1);
+      newSections.splice(dropIndex, 0, draggedItem);
+      
+      // Update orders for all sections
+      const reorderedSections = newSections.map((section, index) => ({
+        ...section,
+        order: index + 1,
+      }));
+      
+      onResumeChange({
+        ...resume,
+        sections: reorderedSections,
+        metadata: {
+          ...resume.metadata,
+          lastModified: new Date().toISOString(),
+        },
+      });
+    }
   };
 
   const handleTemplateChange = (template: ResumeLayout) => {
@@ -114,6 +149,7 @@ export const FlexibleResumeEditor: React.FC<FlexibleResumeEditorProps> = ({
             onSectionAdd={handleSectionAdd}
             onSectionDelete={handleSectionDelete}
             onSectionReorder={handleSectionReorder}
+            onSectionDragReorder={handleSectionDragReorder}
             onSectionSelect={setActiveSection}
             activeSection={activeSection}
           />

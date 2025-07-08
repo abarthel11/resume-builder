@@ -6,8 +6,14 @@ interface SectionManagerProps {
   onSectionAdd: (section: ResumeSection) => void;
   onSectionDelete: (sectionId: string) => void;
   onSectionReorder: (sectionId: string, newOrder: number) => void;
+  onSectionDragReorder?: (draggedId: string, dropTargetId: string) => void;
   onSectionSelect: (sectionId: string) => void;
   activeSection: string | null;
+}
+
+interface DragState {
+  draggedSection: string | null;
+  dragOverSection: string | null;
 }
 
 export const SectionManager: React.FC<SectionManagerProps> = ({
@@ -15,12 +21,17 @@ export const SectionManager: React.FC<SectionManagerProps> = ({
   onSectionAdd,
   onSectionDelete,
   onSectionReorder,
+  onSectionDragReorder,
   onSectionSelect,
   activeSection,
 }) => {
   const [showAddSection, setShowAddSection] = useState(false);
   const [newSectionType, setNewSectionType] = useState<SectionType>('summary');
   const [newSectionTitle, setNewSectionTitle] = useState('');
+  const [dragState, setDragState] = useState<DragState>({
+    draggedSection: null,
+    dragOverSection: null,
+  });
 
   const sectionTypes: { type: SectionType; label: string; icon: string }[] = [
     { type: 'contact', label: 'Contact Information', icon: '📧' },
@@ -124,6 +135,58 @@ export const SectionManager: React.FC<SectionManagerProps> = ({
     }
   };
 
+  // Drag and drop handlers
+  const handleDragStart = (e: React.DragEvent, sectionId: string) => {
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', sectionId);
+    setDragState({ draggedSection: sectionId, dragOverSection: null });
+  };
+
+  const handleDragOver = (e: React.DragEvent, sectionId: string) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    setDragState(prev => ({ ...prev, dragOverSection: sectionId }));
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setDragState(prev => ({ ...prev, dragOverSection: null }));
+  };
+
+  const handleDrop = (e: React.DragEvent, dropTargetId: string) => {
+    e.preventDefault();
+    const draggedId = e.dataTransfer.getData('text/plain');
+    
+    if (draggedId && draggedId !== dropTargetId) {
+      if (onSectionDragReorder) {
+        onSectionDragReorder(draggedId, dropTargetId);
+      } else {
+        // Fallback to old method if new method not provided
+        const sortedSections = [...sections].sort((a, b) => a.order - b.order);
+        const draggedIndex = sortedSections.findIndex(s => s.id === draggedId);
+        const dropIndex = sortedSections.findIndex(s => s.id === dropTargetId);
+        
+        if (draggedIndex !== -1 && dropIndex !== -1) {
+          // Create new array with reordered sections
+          const newSections = [...sortedSections];
+          const [draggedItem] = newSections.splice(draggedIndex, 1);
+          newSections.splice(dropIndex, 0, draggedItem);
+          
+          // Update orders for all affected sections
+          newSections.forEach((section, index) => {
+            onSectionReorder(section.id, index + 1);
+          });
+        }
+      }
+    }
+    
+    setDragState({ draggedSection: null, dragOverSection: null });
+  };
+
+  const handleDragEnd = () => {
+    setDragState({ draggedSection: null, dragOverSection: null });
+  };
+
   const sortedSections = [...sections].sort((a, b) => a.order - b.order);
 
   return (
@@ -176,11 +239,22 @@ export const SectionManager: React.FC<SectionManagerProps> = ({
             key={section.id}
             className={`section-item ${section.enabled ? 'enabled' : 'disabled'} ${
               activeSection === section.id ? 'active' : ''
+            } ${dragState.draggedSection === section.id ? 'dragging' : ''} ${
+              dragState.dragOverSection === section.id ? 'drag-over' : ''
             }`}
+            draggable
+            onDragStart={(e) => handleDragStart(e, section.id)}
+            onDragOver={(e) => handleDragOver(e, section.id)}
+            onDragLeave={handleDragLeave}
+            onDrop={(e) => handleDrop(e, section.id)}
+            onDragEnd={handleDragEnd}
             onClick={() => onSectionSelect(section.id)}
           >
             <div className="section-header">
               <div className="section-info">
+                <span className="drag-handle" title="Drag to reorder">
+                  ⋮⋮
+                </span>
                 <span className="section-icon">
                   {sectionTypes.find(t => t.type === section.type)?.icon || '📄'}
                 </span>
