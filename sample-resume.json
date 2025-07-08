@@ -1,0 +1,91 @@
+{
+  "contact": {
+    "name": "John Doe",
+    "email": "john.doe@email.com",
+    "phone": "(555) 123-4567",
+    "location": "San Francisco, CA",
+    "linkedin": "https://linkedin.com/in/johndoe",
+    "github": "https://github.com/johndoe",
+    "website": "https://johndoe.com"
+  },
+  "summary": "Experienced software engineer with 5+ years of expertise in full-stack development, specializing in React, Node.js, and cloud technologies. Passionate about building scalable applications and mentoring junior developers.",
+  "experience": [
+    {
+      "id": "1",
+      "company": "Tech Corp",
+      "position": "Senior Software Engineer",
+      "startDate": "Jan 2021",
+      "endDate": "",
+      "current": true,
+      "description": "Leading development of microservices architecture and implementing CI/CD pipelines",
+      "achievements": [
+        "Reduced deployment time by 60% through automated CI/CD pipeline implementation",
+        "Mentored 5 junior developers and conducted code reviews",
+        "Architected and implemented a microservices solution serving 1M+ users"
+      ]
+    },
+    {
+      "id": "2",
+      "company": "StartupXYZ",
+      "position": "Full Stack Developer",
+      "startDate": "Jun 2019",
+      "endDate": "Dec 2020",
+      "current": false,
+      "description": "Developed and maintained web applications using React and Node.js",
+      "achievements": [
+        "Built real-time chat feature using WebSockets, improving user engagement by 40%",
+        "Optimized database queries resulting in 50% faster page load times",
+        "Implemented comprehensive testing suite achieving 85% code coverage"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "1",
+      "institution": "University of California, Berkeley",
+      "degree": "Bachelor of Science",
+      "field": "Computer Science",
+      "startDate": "2015",
+      "endDate": "2019",
+      "gpa": "3.8"
+    }
+  ],
+  "skills": [
+    {
+      "id": "1",
+      "category": "Programming Languages",
+      "items": ["JavaScript", "TypeScript", "Python", "Java", "Go"]
+    },
+    {
+      "id": "2",
+      "category": "Frontend",
+      "items": ["React", "Vue.js", "HTML5", "CSS3", "Redux", "GraphQL"]
+    },
+    {
+      "id": "3",
+      "category": "Backend",
+      "items": ["Node.js", "Express", "Django", "PostgreSQL", "MongoDB", "Redis"]
+    },
+    {
+      "id": "4",
+      "category": "DevOps & Tools",
+      "items": ["Docker", "Kubernetes", "AWS", "CI/CD", "Git", "Jenkins"]
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "name": "Open Source Task Manager",
+      "description": "A collaborative task management application with real-time updates and team features",
+      "technologies": ["React", "Node.js", "Socket.io", "MongoDB"],
+      "link": "https://github.com/johndoe/task-manager"
+    },
+    {
+      "id": "2",
+      "name": "AI-Powered Code Review Tool",
+      "description": "Machine learning tool that provides automated code review suggestions",
+      "technologies": ["Python", "TensorFlow", "FastAPI", "React"],
+      "link": "https://github.com/johndoe/ai-code-review"
+    }
+  ]
+}

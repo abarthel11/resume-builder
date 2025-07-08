@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Production build
+dist/
+dist-ssr/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.sw?
+
+# Environment variables
+.env
+.env.local
+
+# TypeScript
+*.tsbuildinfo
+
+# ESLint
+.eslintcache
+
+# User-specific resume files
+austin-resume.json
+*-resume.json
+!sample-resume.json
